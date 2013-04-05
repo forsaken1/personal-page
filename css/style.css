@@ -1,0 +1,205 @@
+/* template */
+
+* 
+{
+	margin:				0;
+	padding:			0;
+}
+
+body 
+{
+	font:			12px/18px Tahoma, Arial, Helvetica, sans-serif;	
+	background-color:#eed
+}
+
+.messageBlock
+{
+	width: 			100%;
+	height: 		30px;	
+	display: 		none;
+	margin-bottom: 	10px;
+}
+
+#messageW, #messageN
+{
+	padding-top: 	5px;
+}
+
+#messageNotice 
+{
+	background-color: #6699CC;
+	border: 		1px solid blue;
+}
+
+#messageWarning 
+{
+	background-color: #FF6633;	
+	border: 		1px solid red;
+}
+
+#header 
+{
+	height:			50px;
+	margin-top:		1px;
+}
+
+#main 
+{
+	border: 		solid 1px #bbb;
+	width: 			806px;
+	margin-top: 	3px;
+	border-radius: 	5px;
+	background-color:White;
+}
+
+#inMain
+{
+	width:			700px;
+	padding-top:	30px;
+	padding-bottom:	30px;
+}
+
+/* enter */
+
+.enterField 
+{
+	margin-top:		2px;
+	width:			200px;
+}
+
+.enterButton 
+{
+	margin-top:		2px;
+	width:			100px;
+	height:			23px;
+}
+
+#regButton
+{
+	width:			150px;
+}
+
+/* article */
+
+.deleteCommentButton
+{
+	float: right;
+}
+
+#commentText 
+{
+	width: 500px;
+}
+
+#articleText 
+{
+	width: 700px;
+}
+
+#commentField 
+{
+	width: 500px;
+}
+
+.bigTextField 
+{
+	width: 600px;
+	height: 200px;
+}
+
+.smallTextField 
+{
+	width: 600px;
+	height: 100px;
+}
+
+.articleField 
+{
+	width: 600px;
+}
+
+.commentBlock 
+{
+	width: 500px;
+	border: 1px solid #FFFFFF;
+}
+
+.commentHeadBlock 
+
+{
+	width: 480px;
+	border-bottom: 1px solid #ccc;
+}
+
+.commentTextBlock 
+{
+	width: 480px;
+}
+
+.articleBlock 
+{
+	width: 700px;
+	border-radius: 	4px;
+	border: 1px solid #ccc;
+}
+
+.articleTextBlock 
+{
+	width: 680px;
+}
+
+.articleHeadBlock 
+{
+	width: 680px;
+	border-bottom: 1px solid #ccc;
+}
+
+.articleFootBlock 
+{
+	width: 680px;
+	border-top: 1px solid #ccc;
+}
+
+a.articleLink   
+{
+	text-decoration: none;
+	color: black;
+}
+
+a.articleLink:visited 
+{
+	color: gray;
+}
+
+a.articleLink:active 
+{
+	color: red;
+}
+
+/* */
+
+#longBar 
+{
+	width: 100%;
+	height: 5px;
+	border-bottom: solid 1px #ccc
+}
+
+.table 
+{
+	width: 100%;
+	border-top: solid 1px #ccc;
+	border-left: solid 1px #ccc;
+}
+
+.table th 
+{
+	border-bottom: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+}
+
+.table td 
+{
+	border-bottom: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+}

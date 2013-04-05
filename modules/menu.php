@@ -3,12 +3,12 @@
 defined('SITE') or die;
 
 $menu = '';
-$mode = (isset($_SESSION['id']) ? $_SESSION['level'] : 0);
+$mode = isset($_SESSION['id']) ? ($_SESSION['level'] == 0 ? 1 : 2) : 0;
 $enter = array('Войти', 'Профиль', 'Админка');
 
-if($cfg['cashe'] && file_exists('cashe/main_menu'.$mode.'.cashe'))
+if($cfg['cache'] && file_exists('cashe/main_menu'.$mode.'.cache'))
 {
-	$fp = fopen($f = 'cashe/main_menu'.$mode.'.cashe', 'r');
+	$fp = fopen($f = 'cache/main_menu'.$mode.'.cache', 'r');
 	$menu = fread($fp, filesize($f));
 	fclose($fp);
 	echo $menu;
@@ -30,9 +30,9 @@ else
 	$menu .= '</a></li>';
 	$menu .= '</ul></div>';
 	
-	if($cfg['cashe'])
+	if($cfg['cache'])
 	{
-		$fp = fopen('cashe/main_menu'.$mode.'.cashe', 'w');
+		$fp = fopen('cache/main_menu'.$mode.'.cache', 'w');
 		fwrite($fp, $menu);
 		fclose($fp);
 	}

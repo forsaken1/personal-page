@@ -4,5 +4,5 @@ Options All -Indexes
 
 
 RewriteEngine On
-RewriteRule ^([a-z]+)/([a-z0-9]+)/?$ index.php?module=$1&id=$2 [L]
+RewriteRule ^([a-z]+)/([A-Za-z0-9]+)/?$ index.php?module=$1&id=$2 [L]
 RewriteRule ^([^/.]+)/?$ index.php?module=$1 [L]

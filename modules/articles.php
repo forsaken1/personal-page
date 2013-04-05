@@ -13,6 +13,11 @@ function content()
 			$request->execute(array($_GET['id']));
 			$result = $request->fetch();
 			
+			if(!$result['id'])
+			{
+				header('Location: /404');
+			}
+			
 			echo '<h1>', $result['title'], '</h1><br>';
 			echo '<h4>', $result['date'], '</h4>';
 			echo '<div id = "longBar"></div>';
@@ -85,7 +90,16 @@ function content()
 		}
 		else
 		{
+			echo '<h1>Статьи по теме "', $_GET['id'], '"</h1><br>';
 			
+			$request = $db->prepare('SELECT * FROM articles WHERE topic = ?');
+			$request->execute(array($_GET['id']));
+			$result = $request->fetchAll();
+			
+			for($i = 0; $i < $request->rowCount(); $i++) 
+			{
+				echo '<a class = "articleLink" href = "/articles/', $result[$i]['id'], '"><div class = "articleBlock"><div class = "articleHeadBlock"><b>Заголовок: </b>', $result[$i]['title'], '</div><div class = "articleTextBlock">', $result[$i]['intro'], '</div><div class = "articleFootBlock"><b>Дата: </b>', $result[$i]['date'],'<b> Тема: </b>', $result[$i]['topic'],'<b> Автор: </b>', $result[$i]['author'],'</div></div></a><br>';
+			}
 		}
 	}
 	else
@@ -239,7 +253,7 @@ function content()
 			
 			for($i = 0; $i < $request->rowCount(); $i++)
 			{
-				echo '<a href = "', $result[$i][0],'"><div>', $result[$i][0],'</div></a>';
+				echo '<a href = "/articles/', $result[$i][0],'"><div>', $result[$i][0],'</div></a>';
 			}
 			echo '<div id = "longBar"></div><br>';
 			

@@ -13,12 +13,18 @@ function HTMLSCDecode($str)
 	return $str;
 }
 
-function isLogin($login) {
+function isLogin($login)
+{
 	global $db;
 	$request = $db->prepare('SELECT login FROM users WHERE login = ? LIMIT 1');
 	$request->execute(array($login));
 	$result = $request->fetch();
 	return $result['login'];
+}
+
+function isAdmin($array)
+{
+	return isset($array['id']) && $array['level'] == 2;
 }
 
 function GetDatabase($db_host, $db_name, $db_login, $db_pass) 

@@ -3,7 +3,7 @@
 defined('SITE') or die;
 
 $cfg['iterator'] = false;
-$cfg['cashe'] = true;
+$cfg['cache'] = true;
 
 //database
 $cfg['db_host'] = 'localhost';

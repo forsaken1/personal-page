@@ -18,6 +18,7 @@ function content()
 			
 			echo '<h3><a href = "pages">Редактор страниц</a><h3>';
 			echo '<h3><a href = "menu_edit">Редактор меню</a><h3>';
+			echo '<h3><a href = "upload">Загрузка изображений</a><h3>';
 			echo '<div id = "longBar"></div>';
 			echo '<br><h3>Пользователи сайта</h3><br>';
 			echo '<table class = "table" cellspacing = 0>';
@@ -64,7 +65,9 @@ function Enter()
 				location = 'enter';
 			}
 			else
+			{
 				SetWarning('Неверный логин или пароль!');
+			}
 		},
 	});	
 }

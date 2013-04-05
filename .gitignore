@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+#cfg.php
 
 *.pydevproject
 .project

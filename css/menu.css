@@ -1,62 +1,42 @@
-#menu {
-	margin:			0 auto;
-	width:			810px;
+
+#menu
+{
+	margin: 			0 auto;
 }
 
-#menu li.firstMenu  {
-	border-radius: 5px 0 0 5px;
+#menu ul
+{
+	list-style: 		none;
 }
 
-#menu li.lastMenu  {
-	border-radius: 0 5px 5px 0;
+#menu li 
+{
+	list-style:			none;
+	display:			block;
+	float:				left;
+	line-height:		40px;
 }
 
-#menu ul {
-	list-style:		none;
+#menu li a
+{
+	display:			block;
+	text-decoration: 	none;
+	text-transform: 	uppercase;
+	font-size: 			12pt;
+	color: 				#999999;
+	height:				40px;
+	padding-right:		10px;
+	padding-left:		10px;
 }
 
-#menu li {
-	list-style:		none;
-	display:		block;
-	float:			left;
-	line-height:	50px;
-	border:			solid #636363;
-	border-width:	0 2px 0 2px;				
-	background:		url(images/menu_005_bg.jpg) repeat-x;
-	height:			50px;
-	margin:			0 1px 0 0;					
+#menu li a:hover
+{
+	color: 				white;
+	background-color:	black;
 }
 
-#menu li a {
-	display:		block;
-	float:			left;
-	color:			#fff;
-	text-transform:	uppercase;
-	font-size:		11px;
-	font-weight:	bold;
-	text-decoration:none;
-	padding:		0 25px;
-	height:			50px;	
-	width:			80px;
-}
-
-#menu li a:hover {
-	color:			#fff;
-	background:		url(images/menu_005_h.jpg) repeat-x;
-}
-
-#menu li a.current {
-	display:		block;
-	float:			left;
-	background:		url(images/menu_005_h.jpg) repeat-x;					
-	color:			#fff;
-	text-transform:	uppercase;
-	font-size:		11px;
-	font-weight:	bold;
-	text-decoration:none;
-	padding:		0 25px;	
-}
-
-#menu li a:hover.current{
-	color:#fff;
+#menu li a.active
+{
+	color: 				white;
+	background-color:	black;	
 }

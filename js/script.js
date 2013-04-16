@@ -21,21 +21,16 @@ function htmlspecialchars(text)
 			text = text.replace(re, replacements[i]);
 		}
 	}
-	return text;
+	return extHTMLSpecialChars(text);
 }
 
 function extHTMLSpecialChars(text)
 {
-	var chars = ['?', '+'];
-	var replacements = ['%ques;', '%plus;'];
+	var chars = Array("?", /\+/g);
+	var replacements = Array("%ques;", "%plus;");
 	for(i = 0; i < chars.length; i++)
 	{
-		for(j = 0; j < text.length; j++)
-		{
-			if(text[j] == chars[i])
-			{
-				
-			}
-		}
+		text = text.replace(chars[i], replacements[i]);
 	}
+	return text;
 }

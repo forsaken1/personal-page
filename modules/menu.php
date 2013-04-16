@@ -5,6 +5,7 @@ defined('SITE') or die;
 $menu = '';
 $mode = isset($_SESSION['id']) ? ($_SESSION['level'] == 0 ? 1 : 2) : 0;
 $enter = array('Войти', 'Профиль', 'Админка');
+$menu_url = null;
 
 if($cfg['cache'] && file_exists('cashe/main_menu'.$mode.'.cache'))
 {
@@ -18,9 +19,8 @@ else
 	$request = $db->query('SELECT * FROM menu ORDER BY sort');
 	$result = $request->fetchAll();
 	
-	$menu .= '<div id="menu"><ul>';
-	$menu .= '<li class = "firstMenu"><a href = "'.$result[0]['url'].'">'.$result[0]['name'].'</a></li>';
-	for($i = 1; $i < $request->rowCount() - 1; $i++)
+	$menu .= '<div id = "menu"><ul>';
+	for($i = 0; $i < $request->rowCount() - 1; $i++)
 	{
 		$menu .= '<li><a href = "'.$result[$i]['url'].'">'.$result[$i]['name'].'</a></li>';
 	}

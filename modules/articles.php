@@ -9,9 +9,7 @@ function content()
 	{
 		if(is_numeric($_GET['id']))
 		{
-			$request = $db->prepare('SELECT * FROM articles WHERE id = ?');
-			$request->execute(array($_GET['id']));
-			$result = $request->fetch();
+			$result = DBFetch('SELECT * FROM articles WHERE id = ?', array($_GET['id']));
 			
 			if(!$result['id'])
 			{
@@ -47,7 +45,7 @@ function content()
 				({
 					type: 'POST',
 					async: true,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=26&id=' + id,
 					dataType: 'json',
 					success: function(msg)
@@ -66,7 +64,7 @@ function content()
 				({
 					type: 'POST',
 					async: true,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=24&article_id=' + article_id + '&author_id=' + author_id + '&text=' + htmlspecialchars($('#commentText').val()) + '&author=' + author,
 					dataType: 'json',
 					success: function(msg) 
@@ -150,7 +148,7 @@ function content()
 				({
 					type: 'POST',
 					async: true,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=25&id=' + id + '&checked=' + checked,
 					dataType: 'json',
 					success: function(msg)
@@ -168,7 +166,7 @@ function content()
 				({
 					type: 'POST',
 					async: false,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=20&topic=' + $('#topicField').val() + '&title=' + $('#titleField').val() + '&text=' + htmlspecialchars($('#textField').val()) + '&intro=' + htmlspecialchars($('#introField').val()),
 					dataType: 'json',
 					success: function() 
@@ -186,7 +184,7 @@ function content()
 					({
 						type: 'POST',
 						async: true,
-						url: 'index.php',
+						url: '/index.php',
 						data: 'n=21&id=' + id,
 						dataType: 'json',
 						success: function(msg)
@@ -203,7 +201,7 @@ function content()
 				({
 					type: 'POST',
 					async: true,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=22&id=' + id,
 					dataType: 'json',
 					success: function(msg) 
@@ -226,7 +224,7 @@ function content()
 				({
 					type: 'POST',
 					async: true,
-					url: 'index.php',
+					url: '/index.php',
 					data: 'n=23&id=' + id + '&topic=' + $('#topicField').val() + '&title=' + $('#titleField').val() + '&text=' + htmlspecialchars($('#textField').val()) + '&intro=' + htmlspecialchars($('#introField').val()),
 					dataType: 'json',
 					success: function(msg) 
@@ -248,16 +246,16 @@ function content()
 		}
 		else
 		{
-			$request = $db->query('SELECT DISTINCT topic FROM articles');
+			$request = $db->query('SELECT DISTINCT topic FROM articles WHERE my = 1');
 			$result = $request->fetchAll();
 			
 			for($i = 0; $i < $request->rowCount(); $i++)
 			{
-				echo '<a href = "/articles/', $result[$i][0],'"><div>', $result[$i][0],'</div></a>';
+				echo '<a href = "/articles/', $result[$i][0],'"><span>', $result[$i][0], '</span></a><br>';
 			}
 			echo '<div id = "longBar"></div><br>';
 			
-			$request = $db->query('SELECT * FROM articles WHERE view = 1 ORDER BY topic');
+			$request = $db->query('SELECT * FROM articles WHERE view = 1 AND my = 1 ORDER BY topic');
 			$result = $request->fetchAll();
 				
 			for($i = 0; $i < $request->rowCount(); $i++) 

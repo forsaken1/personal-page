@@ -2,10 +2,46 @@
 
 defined('SITE') or die;
 
+function DBFetch($q, $arr)
+{
+	global $db;
+	$request = $db->prepare($q);
+	$request->execute($arr);
+	return $request->fetch();
+}
+
+function DBFetchAll($q, $arr)
+{
+	global $db;
+	$request = $db->prepare($q);
+	$request->execute($arr);
+	return $request->fetchAll();
+}
+
+function DBExecute($q, $arr)
+{
+	global $db;
+	$request = $db->prepare($q);
+	$request->execute($arr);
+}
+
+function DBQuery($q)
+{
+	global $db;
+	$request = $db->query($q);
+}
+
+function DBQueryFetchAll($q)
+{
+	global $db;
+	$request = $db->query($q);
+	return $request->fetchAll();
+}
+
 function HTMLSCDecode($str)
 {
-	$search = array('%amp;', '%lt;', '%gt;', '%quot;', "'");
-	$replace = array('&', '<', '>', '"', "'");
+	$search = array('%amp;', '%lt;', '%gt;', '%quot;', "'", '%ques;', '%plus;');
+	$replace = array('&', '<', '>', '"', "'", '?', '+');
 	for($i = 0; $i < count($search); $i++)
 	{
 		$str = str_replace($search, $replace, $str);

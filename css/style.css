@@ -8,8 +8,7 @@
 
 body 
 {
-	font:			12px/18px Tahoma, Arial, Helvetica, sans-serif;	
-	background-color:#eed
+	font:			12px/18px Tahoma, Arial, Helvetica, sans-serif;
 }
 
 .messageBlock
@@ -39,23 +38,26 @@ body
 
 #header 
 {
-	height:			50px;
-	margin-top:		1px;
+	height:			40px;
+	background-color: #222222;
+}
+
+#menuContainer 
+{
+	width:			806px;
+	height:			40px;
 }
 
 #main 
 {
-	border: 		solid 1px #bbb;
 	width: 			806px;
 	margin-top: 	3px;
-	border-radius: 	5px;
-	background-color:White;
 }
 
 #inMain
 {
-	width:			700px;
-	padding-top:	30px;
+	width:			800px;
+	padding-top:	15px;
 	padding-bottom:	30px;
 }
 
@@ -93,7 +95,7 @@ body
 
 #articleText 
 {
-	width: 700px;
+	width: 800px;
 }
 
 #commentField 
@@ -168,12 +170,12 @@ a.articleLink
 
 a.articleLink:visited 
 {
-	color: gray;
+	color: black;
 }
 
 a.articleLink:active 
 {
-	color: red;
+	color: gray;
 }
 
 /* */

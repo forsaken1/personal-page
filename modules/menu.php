@@ -4,7 +4,16 @@ defined('SITE') or die;
 
 $menu = '';
 $mode = isset($_SESSION['id']) ? ($_SESSION['level'] == 0 ? 1 : 2) : 0;
-$enter = array('Войти', 'Профиль', 'Админка');
+$enter = array(
+'<a href="/enter">Войти</a>',
+ 
+'<a href = "/enter">Профиль</a>
+<ul>
+	<li><a>Выйти</a></li>
+</ul>', 
+
+'<a href="/enter">Админка</a>'
+);
 $menu_url = null;
 
 if($cfg['cache'] && file_exists('cashe/main_menu'.$mode.'.cache'))
@@ -25,9 +34,9 @@ else
 		$menu .= '<li><a href = "'.$result[$i]['url'].'">'.$result[$i]['name'].'</a></li>';
 	}
 	$menu .= '<li><a href = "'.$result[$request->rowCount() - 1]['url'].'">'.$result[$request->rowCount() - 1]['name'].'</a></li>';
-	$menu .= '<li class = "lastMenu"><a href="/enter">';
+	$menu .= '<li>';
 	$menu .= $enter[$mode];
-	$menu .= '</a></li>';
+	$menu .= '</li>';
 	$menu .= '</ul></div>';
 	
 	if($cfg['cache'])

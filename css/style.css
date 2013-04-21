@@ -11,6 +11,11 @@ body
 	font:			12px/18px Tahoma, Arial, Helvetica, sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6
+{
+	color:			#222222 !important;
+}
+
 .messageBlock
 {
 	width: 			100%;
@@ -83,9 +88,41 @@ body
 
 /* article */
 
+.topic
+{
+	font-size: 		11pt;
+	color:			#999999;
+	border: 		1px solid #ccc;
+	padding: 		5px;
+	margin-top:		1px;
+	width: 			100%;
+}
+
+.topic:hover
+{
+	border:			1px solid black;
+}
+
+.selected
+{
+	border:			1px solid red !important;
+}
+
+.artTopic
+{
+	font-size: 		11pt;
+	color:			#999999;
+}
+
+.artTitle
+{
+	font-size: 		12pt;
+	color:			#111111;
+}
+
 .deleteCommentButton
 {
-	float: right;
+	float: 			right;
 }
 
 #commentText 
@@ -127,7 +164,6 @@ body
 }
 
 .commentHeadBlock 
-
 {
 	width: 480px;
 	border-bottom: 1px solid #ccc;
@@ -135,31 +171,21 @@ body
 
 .commentTextBlock 
 {
-	width: 480px;
+	width: 			480px;
 }
 
 .articleBlock 
 {
-	width: 700px;
-	border-radius: 	4px;
-	border: 1px solid #ccc;
+	width: 			650px;
+	border: 		1px solid #ccc;
+	margin-top:		1px;
+	text-align: 	left;
+	padding: 		5px;
 }
 
-.articleTextBlock 
+.articleBlock:hover
 {
-	width: 680px;
-}
-
-.articleHeadBlock 
-{
-	width: 680px;
-	border-bottom: 1px solid #ccc;
-}
-
-.articleFootBlock 
-{
-	width: 680px;
-	border-top: 1px solid #ccc;
+	border: 		1px solid black;
 }
 
 a.articleLink   

@@ -32,11 +32,21 @@
 #menu li a:hover
 {
 	color: 				white;
-	background-color:	black;
 }
 
 #menu li a.active
 {
 	color: 				white;
 	background-color:	black;	
+}
+
+#menu ul li ul
+{
+	position: 			absolute;
+	display:			none;
+}
+
+#menu ul li ul:hover
+{
+	display:			block;
 }

@@ -34,8 +34,8 @@ defined('SITE') or die;
 		</div>
 	  </div>
 	  
-	  <div id = 'longBar' style = 'width: 806px;'></div>
-	  <div><h5>Дизайн и разработка Крылов А. (с) 2013</h5></div>
+	  <div id = 'longBar' style = 'width: 800px;'></div>
+	  <div><h5>Дизайн и разработка Крылов А. alexey2142@mail.ru (с) 2013</h5></div>
 	</div>
   </body>
   

@@ -20,7 +20,7 @@ if($cfg['iterator'])
 	$request->execute(array(isset($_SESSION['login']) ? $_SESSION['login'] : 'none', $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']));
 }
 
-$title = 'Сайт визитка Крылова Алексея';
+$title = 'Сайт-визитка Крылова Алексея';
 
 if(isset($_GET['module']))
 {

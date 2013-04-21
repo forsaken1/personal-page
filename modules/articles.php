@@ -9,7 +9,7 @@ function content()
 	{
 		if(is_numeric($_GET['id']))
 		{
-			$result = DBFetch('SELECT * FROM articles WHERE id = ?', array($_GET['id']));
+			$result = DBFetch('SELECT * FROM articles WHERE id = ? AND view = 1', array($_GET['id']));
 			
 			if(!$result['id'])
 			{
@@ -96,7 +96,11 @@ function content()
 			
 			for($i = 0; $i < $request->rowCount(); $i++) 
 			{
-				echo '<a class = "articleLink" href = "/articles/', $result[$i]['id'], '"><div class = "articleBlock"><div class = "articleHeadBlock"><b>Заголовок: </b>', $result[$i]['title'], '</div><div class = "articleTextBlock">', $result[$i]['intro'], '</div><div class = "articleFootBlock"><b>Дата: </b>', $result[$i]['date'],'<b> Тема: </b>', $result[$i]['topic'],'<b> Автор: </b>', $result[$i]['author'],'</div></div></a><br>';
+				echo '<a class = "articleLink" href = "/articles/', $result[$i]['id'], '">
+				<div class = "articleBlock">
+					<div class = "articleHeadBlock"><span class = "artTopic">', $result[$i]['topic'], '::</span>
+					<span class = "artTitle">', $result[$i]['title'],'</span></div>
+				</div></a>';
 			}
 		}
 	}
@@ -116,11 +120,11 @@ function content()
 			$result = $request->fetchAll(); 
 ?>							
 			<table class = "table" cellspacing = 0>
-			<tr><th>No</th><th>П</th><th>Автор</th><th>Тема</th><th>Заголовок</th><th>Операции</th></tr>
+			<tr><th>No</th><th>View</th><th>My</th><th>Автор</th><th>Тема</th><th>Заголовок</th><th>Операции</th></tr>
 <?php			
 			for($i = 0; $i < $request->rowCount(); $i++) 
 			{
-				echo '<tr align = center><td>', $i + 1, '</td><td><input', $result[$i]['view'] ? ' checked ' : ' ', 'type = "checkbox" onclick = "ViewArticle(', $result[$i]['id'], ')" id = "cb_', $result[$i]['id'],'"></td><td>', $result[$i]['author'], '</td><td>', $result[$i]['topic'], '</td><td><a href = "articles/', $result[$i]['id'], '">', $result[$i]['title'], '</a></td><td align = center><input type = button value = "CHG" onclick = "ChangeArticle(', $result[$i]['id'], ')"><input type = button value = "DEL" onclick = "DeleteArticle(', $result[$i]['id'], ')"></td></tr>';
+				echo '<tr align = center><td>', $i + 1, '</td><td><input', $result[$i]['view'] ? ' checked ' : ' ', 'type = "checkbox" onclick = "ViewArticle(', $result[$i]['id'], ')" id = "cb_', $result[$i]['id'],'"></td><td><input', $result[$i]['my'] ? ' checked' : ' ', ' type = checkbox id = "my_art_', $result[$i]['id'], '" onclick = "MyArticle(', $result[$i]['id'], ')"></td><td>', $result[$i]['author'], '</td><td>', $result[$i]['topic'], '</td><td><a href = "articles/', $result[$i]['id'], '">', $result[$i]['title'], '</a></td><td align = center><input type = button value = "CHG" onclick = "ChangeArticle(', $result[$i]['id'], ')"><input type = button value = "DEL" onclick = "DeleteArticle(', $result[$i]['id'], ')"></td></tr>';
 			}
 ?>				
 			</table><br><br>
@@ -135,8 +139,30 @@ function content()
 			$('#addArticleButton').click(function() 
 			{ 
 				AddArticle(); 
-			});
-					
+			});	
+			function MyArticle(id)
+			{
+				var checked = 0;
+				if($('#my_art_' + id).is(':checked'))
+				{
+					checked = 1;
+				}
+				$.ajax
+				({
+					type: 'POST',
+					async: true,
+					url: '/index.php',
+					data: 'n=27&id=' + id + '&checked=' + checked,
+					dataType: 'json',
+					success: function(msg)
+					{
+						if(msg.answer == 'OK')
+						{
+							SetNotice('Статус статьи изменен');
+						}
+					}
+				});
+			}
 			function ViewArticle(id)
 			{
 				var checked = 0;
@@ -249,21 +275,70 @@ function content()
 			$request = $db->query('SELECT DISTINCT topic FROM articles WHERE my = 1');
 			$result = $request->fetchAll();
 			
+			echo '<table cellspacing = 0 id = "notepad" style = "width: 100%;"><tr><th><div class = "artTopic">Темы</div></th><th><div class = "artTopic">Статьи</div></th></tr><tr><td  valign = top align = left>';
+	
 			for($i = 0; $i < $request->rowCount(); $i++)
 			{
-				echo '<a href = "/articles/', $result[$i][0],'"><span>', $result[$i][0], '</span></a><br>';
+				echo '<a onmouseout = "TopicUnselected()" onmouseover = "TopicSelected(this)" class = "articleLink" href = "/articles/', $result[$i][0],'">
+					<div class = "topic">
+						<span class = "artTopic">', $result[$i][0], '</span>
+					</div>
+				</a>';
 			}
-			echo '<div id = "longBar"></div><br>';
+			
+			echo '</td><td valign = top align = right>';
 			
 			$request = $db->query('SELECT * FROM articles WHERE view = 1 AND my = 1 ORDER BY topic');
 			$result = $request->fetchAll();
 				
-			for($i = 0; $i < $request->rowCount(); $i++) 
+			for($i = 0; $i < $request->rowCount(); $i++)
 			{
-				echo '<a class = "articleLink" href = "/articles/', $result[$i]['id'], '"><div class = "articleBlock"><div class = "articleHeadBlock"><b>Заголовок: </b>', $result[$i]['title'], '</div><div class = "articleTextBlock">', $result[$i]['intro'], '</div><div class = "articleFootBlock"><b>Дата: </b>', $result[$i]['date'],'<b> Тема: </b>', $result[$i]['topic'],'<b> Автор: </b>', $result[$i]['author'],'</div></div></a><br>';
+				echo '<a class = "articleLink" href = "/articles/', $result[$i]['id'], '">
+					<div class = "articleBlock">
+						<span class = "artTopic">', $result[$i]['topic'], '::</span>
+						<span class = "artTitle">', $result[$i]['title'],'</span>
+					</div>
+				</a>';
 			}
+			echo '</td></tr></table>'; 
 		}
 	}
+?>
+
+<script>
+
+var selectedArticles = [];
+
+function TopicSelected(handle)
+{
+	var art_block = document.getElementById('notepad').children[0].children[1].children[1];
+	while(selectedArticles.length != 0)
+	{
+		var popped = selectedArticles.pop();
+		$(popped).removeClass('selected');
+	}		
+	for(var i = 0; i < art_block.children.length; i++)
+	{
+		if(art_block.children[i].children[0].children[0].innerHTML.toString() == (handle.children[0].children[0].innerHTML + '::').toString())
+		{
+			$(art_block.children[i].children[0]).addClass('selected');
+			selectedArticles.push(art_block.children[i].children[0]);
+		}
+	}
+}
+
+function TopicUnselected()
+{
+	while(selectedArticles.length != 0)
+	{
+		var popped = selectedArticles.pop();
+		$(popped).removeClass('selected');
+	}	
+}
+
+</script>
+
+<?php
 }
 
 ?>

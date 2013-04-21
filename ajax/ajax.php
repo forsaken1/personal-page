@@ -49,7 +49,7 @@ if(isset($_POST['n']))
 		/* REGISTRATION */
 		case 10: //check login
 		{
-			echo json_encode(array('answer' => (!isLogin($_POST['login'] ? 'OK' : 'NO')) ));
+			echo json_encode(array('answer' => (!isLogin($_POST['login']) ? 'OK' : 'NO')) );
 			exit;
 		}
 		case 11: //add user
@@ -57,6 +57,7 @@ if(isset($_POST['n']))
 			if(!isLogin($_POST['login'])) 
 			{
 				DBExecute("INSERT INTO users (login, pass, mail, date) VALUES (?, ?, ?, ?)", array($_POST['login'], md5($_POST['pass']), $_POST['mail'], date('H:i d.m.o')));
+				echo json_encode(array('answer' => 'OK'));
 			}
 			exit;
 		}
@@ -119,6 +120,15 @@ if(isset($_POST['n']))
 			if(isset($_SESSION['id']))
 			{
 				DBExecute('UPDATE comments SET view = 0 WHERE id = ?', array($_POST['id']));
+				echo json_encode(array('answer' => 'OK'));
+			}
+			exit;
+		}
+		case 27: //article: change status
+		{
+			if(isAdmin($_SESSION))
+			{
+				DBExecute('UPDATE articles SET my = ? WHERE id = ?', array($_POST['checked'], $_POST['id']));
 				echo json_encode(array('answer' => 'OK'));
 			}
 			exit;

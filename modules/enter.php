@@ -39,10 +39,10 @@ function content()
 		echo <<<HTML
 		<h1>Войти на сайт</h1><br>
 		<h3>Авторизуйтесь</h3><br>
-		<form onsubmit = "Enter()">
-		<input autofocus id = 'loginField' class = 'enterField' maxlength = 25><br>
+		<form action = "javascript://" onsubmit = "Enter();">
+		<input required autofocus id = 'loginField' class = 'enterField' maxlength = 25><br>
 		<input required id = 'passField'  class = 'enterField' maxlength = 25 type = password><br>
-		<input required id = 'enterButton' type = 'submit' class = 'enterButton' value = 'Войти'><br><br>
+		<input id = 'enterButton' type = 'submit' class = 'enterButton' value = 'Войти'><br><br>
 		</form>
 		<h4>или <a href = 'registration'>зарегистрируйтесь</a> на сайте</h4>
 HTML;

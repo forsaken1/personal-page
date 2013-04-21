@@ -7,56 +7,84 @@ function content()
 ?>
 <h1>Регистрация</h1><br>
 <h3>Заполните формы</h3><br>
-<h4>Логин</h4>
-<input id = 'loginField' class = 'enterField' onblur = 'checkLogin()'><br>
-<h4>E-mail</h4>
-<input id = 'mailField' class = 'enterField'><br>
-<h4>Пароль</h4>
-<input id = 'passField' class = 'enterField' type = 'password'><br>
-<h4>Повторите пароль</h4>
-<input id = 'dpassField' class = 'enterField' type = 'password'><br>
-<input id = 'regButton' type = 'button' class = 'enterButton' value = 'Зарегистрироваться' onclick = 'checkAll()'><br>
+
+<table cellspacing = 2 align = center>
+	<tr>
+		<td><h5>Логин</h5></td>
+		<td><input id = 'loginField' class = 'enterField' onblur = 'checkLogin()'></td>
+		<td style = 'color: red;  font-size: 8pt; position: absolute; margin-top: 5px;'><span id = 'loginM'></span></td>
+	</tr>
+	
+	<tr>
+		<td><h5>E-mail</h5></td>
+		<td><input id = 'mailField' class = 'enterField'></td>
+		<td style = 'color: red;  font-size: 8pt; position: absolute; margin-top: 5px;'><span id = 'mailM'></span></td>
+	</tr>
+	
+	<tr>
+		<td><h5>Пароль</h5></td>
+		<td><input id = 'passField' class = 'enterField' type = 'password' onblur = 'checkPassword()'></td>
+		<td style = 'color: red;  font-size: 8pt; position: absolute; margin-top: 5px;'><span id = 'passM'></span></td>
+	</tr>
+	
+	<tr>
+		<td><h5>Повторите пароль</h5></td>
+		<td><input id = 'dpassField' class = 'enterField' type = 'password' onblur = 'checkPasswordConf()'></td>
+		<td style = 'color: red;  font-size: 8pt; position: absolute; margin-top: 5px;'><span id = 'passConfM'></span></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td><input id = 'regButton' type = 'button' class = 'enterButton' value = 'Зарегистрироваться' onclick = 'checkAll()'></td>
+		<td></td>
+	</tr>
+</table>
 
 <script>
 function checkPassword()
 {
 	if($('#passField').val().length < 6)
 	{
-		SetWarning('Длина пароля - не менее 6-ти символов!');
-		return 0; 
-	}		
-	return 1;
+		$('#passM').text('Длина пароля - не менее 6-ти символов!');
+		return false; 
+	}
+	else
+	{
+		$('#passM').text('OK');
+		return true;
+	}
 }
 	
 function checkPasswordConf()
 {
 	if(checkPassword())
 	{
-		if($('#passField').val() == $('#dpassField').val())
+		if($('#passField').val().toString() == $('#dpassField').val().toString())
 		{
-			return 1;
+			$('#passConfM').text('OK');
+			return true;
 		}
 		else
 		{
-			SetWarning('Пароли не совпадают!');
+			$('#passConfM').text('Пароли не совпадают!');
 		}
 	}
-	return 0;
+	return false;
 }
 	
 function checkLogin()
 {
-	var check = 0;
+	var check = false;
 		
 	if($('#loginField').val().length == 0)
 	{ 
-		SetWarning('Введите логин!');
-		return 0;
+		$('#loginM').text('Введите логин!');
+		return false;
 	}
 	$.ajax
 	({
 		type: 'POST',
-		async: true,
+		async: false,
 		url: 'index.php',
 		dataType: 'json',
 		data: 'n=10&login=' + $('#loginField').val(),
@@ -64,12 +92,12 @@ function checkLogin()
 		{
 			if(msg.answer == 'OK')
 			{
-				check = 1;
-				SetNotice('Логин корректен');
+				check = true;
+				$('#loginM').text('OK');
 			}
 			else
 			{
-				SetWarning('Данный логин уже зарегистрирован!');
+				$('#loginM').text('Данный логин уже зарегистрирован!');
 			}
 		}
 	});	
